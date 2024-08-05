@@ -7,7 +7,9 @@ const Document = () => {
   return (
     <div>
       <Header>
-        <p className="text-white">Tst</p>
+        <div className="flex w-fit items-center justify-center gap-2">
+          <p className="document-title">Abhijeet sex</p>
+        </div>
       </Header>
         <Editor />
     </div>
