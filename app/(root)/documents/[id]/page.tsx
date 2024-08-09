@@ -10,14 +10,14 @@ const Document = () => {
         <div className="flex w-fit items-center justify-center gap-2">
           <p className="document-title">Abhijeet sex</p>
         </div>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </Header>
-      {/* <Editor /> */}
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+      <Editor />
     </div>
   );
 };
