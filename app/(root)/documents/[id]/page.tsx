@@ -1,7 +1,7 @@
-
-import { Editor } from '@/components/editor/Editor'
-import Header from '@/components/Header'
-import React from 'react'
+import { Editor } from "@/components/editor/Editor";
+import Header from "@/components/Header";
+import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import React from "react";
 
 const Document = () => {
   return (
@@ -11,9 +11,15 @@ const Document = () => {
           <p className="document-title">Abhijeet sex</p>
         </div>
       </Header>
-        <Editor />
+      {/* <Editor /> */}
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
     </div>
-  )
-}
+  );
+};
 
-export default Document
+export default Document;
