@@ -4,7 +4,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 import React from "react";
 import Image from "next/image";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser, EmailAddress } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 const page = async () => {
@@ -32,9 +32,11 @@ const page = async () => {
             width={40}
             height={40}
             className="mx-auto"
-          >
-            <AddDocumentBtn />
-          </Image>
+          />
+          <AddDocumentBtn
+            userId={clerkUser.id}
+            email={clerkUser.emailAddresses[0].emailAddress}
+          />
         </div>
       )}
     </main>
