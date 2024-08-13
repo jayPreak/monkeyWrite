@@ -35,3 +35,17 @@ export const createDocument = async ({
     console.error(`Error creating room of id ${roomId}: ${error}`);
   }
 };
+
+export const getDocument = async ({
+  roomId,
+  userId,
+}: {
+  roomId: string;
+  userId: string;
+}) => {
+  try {
+    const;
+  } catch (error) {
+    console.error(`Error fetching room of id ${roomId}: ${error}`);
+  }
+};
