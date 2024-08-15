@@ -12,6 +12,7 @@ const CollaborativeRoom = ({
   roomId,
   roomMetadata,
 }: CollaborativeRoomProps) => {
+  const [editing, setEditing] = useState(false);
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
