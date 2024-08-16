@@ -8,6 +8,8 @@ import { Editor } from "./editor/Editor";
 import Header from "./Header";
 import ActiveCollaborators from "./ActiveCollaborators";
 import { Input } from "./ui/input";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
 
 const CollaborativeRoom = ({
   roomId,
@@ -19,6 +21,8 @@ const CollaborativeRoom = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const updateTitleHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {};
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
@@ -29,10 +33,35 @@ const CollaborativeRoom = ({
               className="flex w-fit items-center justify-center gap-2"
             >
               {editing && !loading ? (
-                <Input />
+                <Input
+                  type="text"
+                  value={documentTitle}
+                  onChange={(e) => setDocumentTitle(e.target.value)}
+                  ref={inputRef}
+                  placeholder="Enter title"
+                  onKeyDown={updateTitleHandler}
+                  className="document-title-input"
+                  disabled={!editing}
+                />
               ) : (
                 <p className="document-title">{documentTitle}</p>
               )}
+              {currentUserType === "editor" && !editing && (
+                <Image
+                  src="/assets/icons/edit.svg"
+                  alt="edit"
+                  width={24}
+                  height={24}
+                  onClick={() => setEditing(true)}
+                  className="cursor-pointer"
+                />
+              )}
+
+              {currentUserType !== "editor" && !editing && (
+                <p className="view-only-tag">View Only</p>
+              )}
+
+              {loading && <p className="text-sm text-gray-400">Saving...</p>}
               {/* <p className="document-title">Abhijeet sex</p> */}
             </div>
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
