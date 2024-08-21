@@ -1,7 +1,7 @@
 "use client";
 
 import { RoomProvider, ClientSideSuspense } from "@liveblocks/react/suspense";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Loader from "./Loader";
 import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
 import { Editor } from "./editor/Editor";
@@ -21,6 +21,25 @@ const CollaborativeRoom = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const currentUserType = "editor";
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setEditing(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
   const updateTitleHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {};
   return (
