@@ -6,11 +6,14 @@ import Image from "next/image";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
 import { currentUser, EmailAddress } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { getDocuments } from "@/lib/actions/room.actions";
 
 const page = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
-  const documents = [];
+  const roomDocuments = await getDocuments(
+    clerkUser.emailAddresses[0].emailAddress
+  );
   return (
     <main className="home-container">
       <Header className="sticky left-0 top-0">
@@ -22,8 +25,12 @@ const page = async () => {
         </div>
       </Header>
 
-      {documents.length > 0 ? (
-        <div className="flex"></div>
+      {roomDocuments.data.length > 0 ? (
+        <div className="document-list-container">
+          <div className="document-list-title">
+            <h3 className="text-28-semibold">All documents </h3>
+          </div>
+        </div>
       ) : (
         <div className="document-list-empty">
           <Image
