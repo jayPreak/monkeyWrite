@@ -9,6 +9,7 @@ import {
 import React, { ReactNode } from "react";
 
 const Provider = ({ children }: { children: ReactNode }) => {
+  //como
   return (
     <LiveblocksProvider
       authEndpoint="/api/liveblocks-auth"
