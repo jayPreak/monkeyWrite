@@ -52,19 +52,19 @@ export function Editor({
           {status === "not-loaded" || status === "loading" ? (
             <Loader />
           ) : (
-            <div></div>
+            <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
+              <RichTextPlugin
+                contentEditable={
+                  <ContentEditable className="editor-input h-full" />
+                }
+                placeholder={<Placeholder />}
+                ErrorBoundary={LexicalErrorBoundary}
+              />
+              {currentUserType === "editor" && <FloatingToolbarPlugin />}
+              <HistoryPlugin />
+              <AutoFocusPlugin />
+            </div>
           )}
-        </div>
-        <div className="editor-inner h-[1100px]">
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable className="editor-input h-full" />
-            }
-            placeholder={<Placeholder />}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <HistoryPlugin />
-          <AutoFocusPlugin />
         </div>
       </div>
     </LexicalComposer>
