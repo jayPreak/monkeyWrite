@@ -12,6 +12,7 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import React from "react";
 import { liveblocksConfig, useEditorStatus } from "@liveblocks/react-lexical";
 import Loader from "../Loader";
+import FloatingToolbarPlugin from "./plugins/FloatingToolbarPlugin";
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
