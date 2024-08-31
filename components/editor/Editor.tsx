@@ -10,7 +10,11 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import React from "react";
-import { liveblocksConfig, useEditorStatus } from "@liveblocks/react-lexical";
+import {
+  liveblocksConfig,
+  LiveblocksPlugin,
+  useEditorStatus,
+} from "@liveblocks/react-lexical";
 import Loader from "../Loader";
 import FloatingToolbarPlugin from "./plugins/FloatingToolbarPlugin";
 
@@ -66,6 +70,8 @@ export function Editor({
               <AutoFocusPlugin />
             </div>
           )}
+
+          <LiveblocksPlugin></LiveblocksPlugin>
         </div>
       </div>
     </LexicalComposer>

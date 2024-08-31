@@ -15,7 +15,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   });
   if (!room) redirect("/");
 
-  const userIds = Object.keys(room.metadata.users);
+  const userIds = Object.keys(room.userAccesses);
   const users = await getCLerkUsers({ userIds });
 
   const currentUserType = room.userAccesses[
