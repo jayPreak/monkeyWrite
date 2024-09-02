@@ -13,12 +13,14 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
     roomId: id,
     userId: clerkUser.emailAddresses[0].emailAddress,
   });
+  console.log({ room });
+  console.log("user rooms", room.usersAccesses);
   if (!room) redirect("/");
 
-  const userIds = Object.keys(room.userAccesses);
+  const userIds = Object.keys(room.usersAccesses);
   const users = await getCLerkUsers({ userIds });
 
-  const currentUserType = room.userAccesses[
+  const currentUserType = room.usersAccesses[
     clerkUser.emailAddresses[0].emailAddress
   ]?.includes("room:write")
     ? "editor"
@@ -26,7 +28,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
 
   const usersData = users.map((user: User) => ({
     ...user,
-    userType: room.userAccesses[user.email]?.includes("room:write")
+    userType: room.usersAccesses[user.email]?.includes("room:write")
       ? "editor"
       : "viewer",
   }));
