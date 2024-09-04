@@ -1,7 +1,8 @@
 "use client";
 
 import Loader from "@/components/Loader";
-import { getCLerkUsers } from "@/lib/actions/user.actions";
+import { getCLerkUsers, getDocumentUsers } from "@/lib/actions/user.actions";
+import { useUser } from "@clerk/nextjs";
 import {
   ClientSideSuspense,
   LiveblocksProvider,
@@ -9,6 +10,7 @@ import {
 import React, { ReactNode } from "react";
 
 const Provider = ({ children }: { children: ReactNode }) => {
+  const { user: clerkUser } = useUser();
   //como
   return (
     <LiveblocksProvider
@@ -16,6 +18,14 @@ const Provider = ({ children }: { children: ReactNode }) => {
       resolveUsers={async ({ userIds }) => {
         const users = await getCLerkUsers({ userIds });
         return users;
+      }}
+      resolveMentionSuggestions={async ({ roomId, text }) => {
+        const roomUsers = await getDocumentUsers({
+          roomId,
+          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          text,
+        });
+        return roomUsers;
       }}
     >
       <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>]
