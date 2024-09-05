@@ -113,7 +113,12 @@ const CollaborativeRoom = ({
             </div>
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
               <ActiveCollaborators />
-<
+              <ShareModal
+                roomId={roomId}
+                currentUserType={currentUserType}
+                collaborators={users}
+                creatorId={roomMetadata.creatorId}
+              />
               <SignedOut>
                 <SignInButton />
               </SignedOut>
