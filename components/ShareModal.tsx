@@ -26,7 +26,7 @@ const ShareModal = ({
 
   const shareDocumentHandler = async () => {};
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>Open</DialogTrigger>
       <DialogContent>
         <DialogHeader>
