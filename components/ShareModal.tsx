@@ -94,7 +94,6 @@ const ShareModal = ({
             {loading ? "Sending..." : "Invite"}
           </Button>
         </div>
-
         <div className="my-2 space-y-2">
           <ul className="flex flex-col">
             {collaborators.map((collaborator) => (
