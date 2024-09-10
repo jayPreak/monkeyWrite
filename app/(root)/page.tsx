@@ -1,26 +1,29 @@
-import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import React from "react";
-import Image from "next/image";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
-import { currentUser, EmailAddress } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { DeleteModal } from "@/components/DeleteModal";
+import Header from "@/components/Header";
+import Notifications from "@/components/Notification";
+import { Button } from "@/components/ui/button";
 import { getDocuments } from "@/lib/actions/room.actions";
-import Link from "next/link";
 import { dateConverter } from "@/lib/utils";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
-const page = async () => {
+const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
+
   const roomDocuments = await getDocuments(
     clerkUser.emailAddresses[0].emailAddress
   );
+
   return (
     <main className="home-container">
       <Header className="sticky left-0 top-0">
         <div className="flex items-center gap-2 lg:gap-4">
-          Notification
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -52,12 +55,13 @@ const page = async () => {
                     />
                   </div>
                   <div className="space-y-1">
-                    <p className="line-clamp-1 text-lg"> {metadata.title}</p>
+                    <p className="line-clamp-1 text-lg">{metadata.title}</p>
                     <p className="text-sm font-light text-blue-100">
                       Created about {dateConverter(createdAt)}
                     </p>
                   </div>
                 </Link>
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>
@@ -66,11 +70,12 @@ const page = async () => {
         <div className="document-list-empty">
           <Image
             src="/assets/icons/doc.svg"
-            alt="DOcument"
+            alt="Document"
             width={40}
             height={40}
             className="mx-auto"
           />
+
           <AddDocumentBtn
             userId={clerkUser.id}
             email={clerkUser.emailAddresses[0].emailAddress}
@@ -81,4 +86,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Home;
