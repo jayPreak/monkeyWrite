@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { dark, neobrutalism } from "@clerk/themes";
 import Provider from "./Provider";
 
 const fontSans = FontSans({
@@ -27,10 +27,16 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        // baseTheme: neobrutalism,
+        // variables: {
+        //   colorPrimary: "#ffffff",
+        //
+        // },
         variables: {
-          colorPrimary: "#3371FF",
+          colorPrimary: "red",
+          colorText: "white",
           fontSize: "16px",
+          colorBackground: "white",
         },
       }}
     >
