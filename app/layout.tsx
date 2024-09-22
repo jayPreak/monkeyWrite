@@ -12,7 +12,7 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: "MonkeyWrite",
   description: "Ape write together",
   // image: "https://example.com/image.jpg",
